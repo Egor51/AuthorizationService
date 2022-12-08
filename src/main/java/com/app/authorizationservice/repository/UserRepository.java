@@ -11,17 +11,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class UserRepository {
-    boolean OK = true;
-    String NOT = "NOT";
     private final static Map<String, User> map = new ConcurrentHashMap<>();
 
 
     public UserRepository() {
-        //test users
+
         map.put("bob", new User("bob", "qwerty", Arrays.asList(Authorities.READ, Authorities.WRITE)));
         map.put("jack", new User("jack", "123456", Arrays.asList(Authorities.READ, Authorities.WRITE, Authorities.DELETE)));
         map.put("men", new User("men", "123456", Arrays.asList(Authorities.READ)));
-        //end test users
+
     }
 
 
