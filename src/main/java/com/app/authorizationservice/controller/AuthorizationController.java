@@ -5,6 +5,7 @@ import com.app.authorizationservice.exeotion.UnauthorizedUser;
 import com.app.authorizationservice.model.Authorities;
 import com.app.authorizationservice.model.User;
 import com.app.authorizationservice.service.AuthorizationService;
+import lombok.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,8 +25,8 @@ public class AuthorizationController {
 
 
     @GetMapping("/authorize")
-    public List<Authorities> getAuthorities(@RequestParam("user") String user,
-                                            @RequestParam("password") String password) {
+    public List<Authorities> getAuthorities( @RequestParam("user") String user,
+                                            @NonNull@RequestParam("password") String password) {
         return service.getAuthorities(user, password);
     }
 
@@ -36,7 +37,7 @@ public class AuthorizationController {
 
     @ExceptionHandler(UnauthorizedUser.class)
     public ResponseEntity<String> handleUnauthorizedUser (UnauthorizedUser e) {
-        return new ResponseEntity<>("Exception: " + e.getMessage(), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("[ERROR: UnauthorizedUser] : " + e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
 }
